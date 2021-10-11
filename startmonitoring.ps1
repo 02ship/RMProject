@@ -7,8 +7,9 @@
 
 ### DEFINE ACTIONS AFTER AN EVENT IS DETECTED
     $action = { $path = $Event.SourceEventArgs.FullPath
+                $name = $Event.SourceEventArgs.Name
                 $changeType = $Event.SourceEventArgs.ChangeType
-                $logline = "$(Get-Date), $changeType, $path"
+                $logline = "$(Get-Date), $changeType, $path, $name"
                 Add-content "F:\PaulShields\PDFs\log.txt" -value $logline
                 Start-Process F:\PaulShields\RMProject\invoicegen.bat -NoNewWindow -Wait
                 Start-Process F:\PaulShields\RMProject\irfan2.bat -NoNewWindow -Wait
