@@ -1,6 +1,6 @@
 ### SET FOLDER TO WATCH + FILES TO WATCH + SUBFOLDERS YES/NO
     $watcher = New-Object System.IO.FileSystemWatcher
-    $watcher.Path = "C:\Users\Paul\Daniel pdfs"
+    $watcher.Path = "F:\PaulShields\PDFs"
     $watcher.Filter = "*.pdf"
 ###    $watcher.IncludeSubdirectories = $true
     $watcher.EnableRaisingEvents = $true  
@@ -9,8 +9,8 @@
     $action = { $path = $Event.SourceEventArgs.FullPath
                 $changeType = $Event.SourceEventArgs.ChangeType
                 $logline = "$(Get-Date), $changeType, $path"
-                Add-content "C:\Users\Paul\Daniel pdfs\log.txt" -value $logline
-                Start-Process C:\Users\Paul\irfan2.bat
+                Add-content "F:\PaulShields\PDFs\log.txt" -value $logline
+                Start-Process F:\PaulShields\RMProject\irfan2.bat
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
     Register-ObjectEvent $watcher "Created" -Action $action
