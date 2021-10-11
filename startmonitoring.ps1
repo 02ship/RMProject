@@ -10,7 +10,7 @@
                 $changeType = $Event.SourceEventArgs.ChangeType
                 $logline = "$(Get-Date), $changeType, $path"
                 Add-content "F:\PaulShields\PDFs\log.txt" -value $logline
-                Start-Process F:\PaulShields\RMProject\irfan2.bat
+                Start-Process F:\PaulShields\RMProject\irfan2.bat -NoNewWindow -Wait
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
     Register-ObjectEvent $watcher "Created" -Action $action
