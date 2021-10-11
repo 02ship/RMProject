@@ -9,6 +9,7 @@
     $action = { $path = $Event.SourceEventArgs.FullPath
                 $name = $Event.SourceEventArgs.Name
                 $changeType = $Event.SourceEventArgs.ChangeType
+                $name = $name.TrimEnd(".pdf")
                 $logline = "$(Get-Date), $changeType, $path, $name"
                 Add-content "F:\PaulShields\PDFs\log.txt" -value $logline
                 Start-Process F:\PaulShields\RMProject\invoicegen.bat -NoNewWindow -Wait
