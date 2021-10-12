@@ -1,6 +1,5 @@
-:: The following command generates a PDF invoice using a modified (.00) header reference
-:: This works using the Invoice_for_PDF.rpt, but not invoice.rpt. I have no idea why.
-:: Next task afterwards will be integrating this with the image conversion script in order to automate invoice generation
+:: This works using the Invoice_for_PDF.rpt, but not invoice_for_RM.rpt yet due to subreport linked parameters
+
 
 set arg1=%1
 
