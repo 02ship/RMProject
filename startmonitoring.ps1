@@ -13,7 +13,15 @@
                 $logline = "$(Get-Date), $changeType, $path"
                 Add-content "F:\PaulShields\PDFs\log.txt" -value $logline
                 Start-Process F:\PaulShields\RMProject\irfan2.bat -NoNewWindow -Wait
-                Start-Process F:\PaulShields\RMProject\invoicegen.bat $name -NoNewWindow -Wait
+                New-Item F:\PaulShields\commandfile.txt
+                Add-Content F:\PaulShields\commandfile.txt "report=F:\Montana Reports\Invoice_for_RM.rpt"
+                Add-Content F:\PaulShields\commandfile.txt "printer=iR C3380"
+                Add-Content F:\PaulShields\commandfile.txt ("{?HeaderRef}=" + $name.ToString())
+                Add-Content F:\PaulShields\commandfile.txt "{?IsCopy}=False"
+                Add-Content F:\PaulShields\commandfile.txt ("{?QR_path}=F:\PaulShields\jpgs\" + $name.ToString() + ".bmp")
+                Start-Process F:\PaulShields\RMProject\invoicegen.bat -NoNewWindow -Wait
+                Remove-Item F:\PaulShields\commandfile.txt
+###                Start-Process F:\PaulShields\RMProject\invoicegen.bat $name -NoNewWindow -Wait
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
     Register-ObjectEvent $watcher "Created" -Action $action
