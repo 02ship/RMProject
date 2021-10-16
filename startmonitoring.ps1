@@ -21,7 +21,6 @@
                 Add-Content F:\PaulShields\commandfile.txt ("{?QR_path}=F:\PaulShields\jpgs\" + $name.ToString() + ".bmp")
                 Start-Process F:\PaulShields\RMProject\invoicegen.bat -NoNewWindow -Wait
                 Remove-Item F:\PaulShields\commandfile.txt
-###                Start-Process F:\PaulShields\RMProject\invoicegen.bat $name -NoNewWindow -Wait
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
     Register-ObjectEvent $watcher "Created" -Action $action
