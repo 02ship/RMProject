@@ -15,7 +15,6 @@
                 Start-Process F:\PaulShields\RMProject\irfan2.bat -NoNewWindow -Wait
                 New-Item F:\PaulShields\commandfile.txt
                 Add-Content F:\PaulShields\commandfile.txt "report=F:\Montana Reports\Invoice_for_RM.rpt"
-                Add-Content F:\PaulShields\commandfile.txt "printer=iR C3380"
                 Add-Content F:\PaulShields\commandfile.txt ("{?HeaderRef}=" + $name.ToString())
                 Add-Content F:\PaulShields\commandfile.txt "{?IsCopy}=False"
                 Add-Content F:\PaulShields\commandfile.txt ("{?QR_path}=F:\PaulShields\jpgs\" + $name.ToString() + ".bmp")
