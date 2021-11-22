@@ -1,1 +1,1 @@
-"C:\Program Files\IrfanView\i_view64.exe" /filelist="F:\PaulShields\PDFs\*.pdf" /convert="F:\PaulShields\jpgs\*.bmp"
+"C:\Program Files\IrfanView\i_view64.exe" /filelist="C:\RoyalMail\Click&Drop\Labels\*.pdf" /convert="C:\RoyalMail\RMProject\jpgs\*.jpg"
