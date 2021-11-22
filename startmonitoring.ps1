@@ -1,6 +1,6 @@
 ### SET FOLDER TO WATCH + FILES TO WATCH + SUBFOLDERS YES/NO
     $watcher = New-Object System.IO.FileSystemWatcher
-    $watcher.Path = "F:\PaulShields\PDFs"
+    $watcher.Path = "C:\RoyalMail\Click&Drop\Labels"
     $watcher.Filter = "*.pdf"
 ###    $watcher.IncludeSubdirectories = $true
     $watcher.EnableRaisingEvents = $true  
@@ -11,15 +11,21 @@
                 $changeType = $Event.SourceEventArgs.ChangeType
                 $name = $name.TrimEnd(".pdf")
                 $logline = "$(Get-Date), $changeType, $path"
-                Add-content "F:\PaulShields\PDFs\log.txt" -value $logline
-                Start-Process F:\PaulShields\RMProject\irfan2.bat -NoNewWindow -Wait
-                New-Item F:\PaulShields\commandfile.txt
-                Add-Content F:\PaulShields\commandfile.txt "report=F:\Montana Reports\Invoice_for_RM.rpt"
-                Add-Content F:\PaulShields\commandfile.txt ("{?HeaderRef}=" + $name.ToString())
-                Add-Content F:\PaulShields\commandfile.txt "{?IsCopy}=False"
-                Add-Content F:\PaulShields\commandfile.txt ("{?QR_path}=F:\PaulShields\jpgs\" + $name.ToString() + ".bmp")
-                Start-Process F:\PaulShields\RMProject\invoicegen.bat -NoNewWindow -Wait
-                Remove-Item F:\PaulShields\commandfile.txt
+                Add-content "C:\RoyalMail\log.txt" -value $logline
+###                Start-Process C:\RoyalMail\RMProject\magick.bat $name.ToString() -NoNewWindow -Wait
+                Start-Process C:\RoyalMail\RMProject\irfan2.bat -NoNewWindow -Wait
+                New-Item C:\RoyalMail\commandfile.txt -ItemType "file"
+                Add-Content C:\RoyalMail\commandfile.txt "report=C:\RoyalMail\RMProject\Invoice_for_RM.rpt"
+                Add-Content C:\RoyalMail\commandfile.txt "format=Acrobat File"
+                Add-Content C:\RoyalMail\commandfile.txt ("disk=C:\RoyalMail\invoices\" + $name.ToString() + ".pdf")
+                Add-Content C:\RoyalMail\commandfile.txt ("{?HeaderRef}=" + $name.ToString())
+                Add-Content C:\RoyalMail\commandfile.txt "{?IsCopy}=False"
+                Add-Content C:\RoyalMail\commandfile.txt ("{?QR_path}=C:\RoyalMail\RMProject\jpgs\" + $name.ToString() + ".jpg")
+                Start-Process C:\RoyalMail\RMProject\invoicegen.bat -NoNewWindow -Wait
+                Remove-Item C:\RoyalMail\commandfile.txt
+                Start-Process C:\RoyalMail\RMProject\autoprint.bat ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -NoNewWindow -Wait
+                Remove-Item ('C:\RoyalMail\RMProject\jpgs\' + $name.ToString() + '.jpg')
+                Move-Item -Path ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -Destination ('C:\RoyalMail\invoices\archive\' + $name.ToString() + '.pdf')
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
     Register-ObjectEvent $watcher "Created" -Action $action
