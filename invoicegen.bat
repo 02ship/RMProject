@@ -1,1 +1,1 @@
-powershell -Command "& {cd 'C:\Program Files (x86)\CrystalKiwi\Explorer'; Start-Process CrystalKiwiExplorer.exe @F:\PaulShields\commandfile.txt;}"
+powershell -Command "& {cd 'C:\Program Files (x86)\CrystalKiwi\Explorer'; Start-Process CrystalKiwiExplorer.exe @C:\RoyalMail\commandfile.txt;}"
