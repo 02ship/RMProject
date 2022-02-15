@@ -1,6 +1,0 @@
-report=F:\Montana Reports\Invoice_for_RM.rpt
-printer=iR C3380
-{?HeaderRef}=41050173
-{?IsCopy}=False
-{?QR_path}=F:\PaulShields\jpgs\41050173.bmp
-
