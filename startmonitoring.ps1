@@ -25,6 +25,7 @@
                 Remove-Item C:\RoyalMail\commandfile.txt
                 Start-Process C:\RoyalMail\RMProject\autoprint.bat ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -NoNewWindow -Wait
                 Move-Item -Path ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -Destination ('C:\RoyalMail\invoices\archive\' + $name.ToString() + '.pdf')
+                Start-Sleep -s 1
                 Remove-Item ("C:\RoyalMail\RMProject\jpgs\" + $name.ToString() + ".jpg")
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
