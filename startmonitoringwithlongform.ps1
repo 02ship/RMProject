@@ -1,4 +1,7 @@
-### SET FOLDER TO WATCH + FILES TO WATCH + SUBFOLDERS YES/NO
+### EMPTY JPGS FOLDER BEFORE RUNNIGN WATCH SCRIPT
+Set-Location "C:\RoyalMail\RMProject\jpgs"
+Remove-Item *.jpg
+### SET FOLDER + FILES TO WATCH + SUBFOLDERS YES/NO
     $watcher = New-Object System.IO.FileSystemWatcher
     $watcher.Path = "C:\RoyalMail\Click&Drop\Labels"
     $watcher.Filter = "*.pdf"
