@@ -1,6 +1,8 @@
 ### COPY ITEMS FROM WATCH FOLDER TO BACKUP
 Set-Location "C:\RoyalMail\Click&Drop\Labels"
-Move-Item -Path .\*.pdf -Destination "C:\RoyalMail\Label back-up"
+Move-Item -Path .\*.pdf -Destination "C:\RoyalMail\LabelBackup"
+### DELETE ITEMS FROM BACKUP FOLDER AFTER 7 DAYS
+Get-ChildItem -path C:\RoyalMail\LabelBackup | where {$_.Lastwritetime -lt (date).adddays(-7)} | remove-item
 ### EMPTY JPGS FOLDER BEFORE RUNNIGN WATCH SCRIPT
 Set-Location "C:\RoyalMail\RMProject\jpgs"
 Remove-Item *.jpg
