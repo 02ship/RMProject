@@ -1,3 +1,6 @@
+### COPY ITEMS FROM WATCH FOLDER TO BACKUP
+Set-Location "C:\RoyalMail\Click&Drop\Labels"
+Move-Item -Path .\*.pdf -Destination "C:\RoyalMail\Label back-up"
 ### EMPTY JPGS FOLDER BEFORE RUNNIGN WATCH SCRIPT
 Set-Location "C:\RoyalMail\RMProject\jpgs"
 Remove-Item *.jpg
