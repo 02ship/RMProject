@@ -3,7 +3,7 @@ Set-Location "C:\RoyalMail\Click&Drop\Labels"
 Move-Item -Path .\*.pdf -Destination "C:\RoyalMail\LabelBackup"
 ### DELETE ITEMS FROM BACKUP FOLDER AFTER 7 DAYS
 Get-ChildItem -path C:\RoyalMail\LabelBackup | where {$_.Lastwritetime -lt (date).adddays(-7)} | remove-item
-### EMPTY JPGS FOLDER BEFORE RUNNIGN WATCH SCRIPT
+### EMPTY JPGS FOLDER BEFORE RUNNING WATCH SCRIPT
 Set-Location "C:\RoyalMail\RMProject\jpgs"
 Remove-Item *.jpg
 ### SET FOLDER + FILES TO WATCH + SUBFOLDERS YES/NO
@@ -20,7 +20,6 @@ Remove-Item *.jpg
                 $name = $name.TrimEnd(".pdf")
                 $logline = "$(Get-Date), $changeType, $path"
                 Add-content "C:\RoyalMail\log.txt" -value $logline
-###                Start-Process C:\RoyalMail\RMProject\magick.bat $name.ToString() -NoNewWindow -Wait
                 Start-Process C:\RoyalMail\RMProject\irfan3.bat -NoNewWindow -Wait
                 New-Item C:\RoyalMail\commandfile.txt -ItemType "file"
                 Add-Content C:\RoyalMail\commandfile.txt "report=C:\RoyalMail\RMProject\Longform_Invoice_for_RM.rpt"
