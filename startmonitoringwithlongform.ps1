@@ -21,18 +21,13 @@ Remove-Item *.jpg
                 $logline = "$(Get-Date), $changeType, $path"
                 Add-content "C:\RoyalMail\log.txt" -value $logline
                 Start-Process C:\RoyalMail\RMProject\irfan3.bat -NoNewWindow -Wait
-                New-Item C:\RoyalMail\commandfile.txt -ItemType "file"
-                Add-Content C:\RoyalMail\commandfile.txt "report=C:\RoyalMail\RMProject\Longform_Invoice_for_RM.rpt"
-                Add-Content C:\RoyalMail\commandfile.txt "format=Acrobat File"
-                Add-Content C:\RoyalMail\commandfile.txt ("disk=C:\RoyalMail\invoices\" + $name.ToString() + ".pdf")
-                Add-Content C:\RoyalMail\commandfile.txt ("{?HeaderRef}=" + $name.ToString())
-                Add-Content C:\RoyalMail\commandfile.txt "{?IsCopy}=False"
-                Add-Content C:\RoyalMail\commandfile.txt ("{?QR_path}=C:\RoyalMail\RMProject\jpgs\" + $name.ToString() + ".jpg")
-                Start-Process C:\RoyalMail\RMProject\invoicegen.bat -NoNewWindow -Wait
-                Remove-Item C:\RoyalMail\commandfile.txt
+		$cmd = 'start C:\RoyalMail\CrystalReportsNinja\Deployment\CrystalReportsNinja.exe -F "C:\RoyalMail\RMProject\Longform_Invoice_for_RM.rpt" -E pdf -O "C:\RoyalMail\invoices\' + $name + '.pdf" -a "HeaderRef:' + $name + '" -a "IsCopy:False"'
+		Set-Content -Path "C:\RoyalMail\CRNinja.bat" -Value $cmd
+		Start-Process C:\RoyalMail\CRNinja.bat -NoNewWindow -Wait
                 Start-Process C:\RoyalMail\RMProject\autoprintlongform.bat ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -NoNewWindow -Wait
                 Remove-Item ("C:\RoyalMail\RMProject\jpgs\" + $name.ToString() + ".jpg")
                 Move-Item -Path ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -Destination ('C:\RoyalMail\invoices\archive\' + $name.ToString() + '.pdf')
+		Remove-Item C:\RoyalMail\CRNinja.bat
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
     Register-ObjectEvent $watcher "Created" -Action $action
