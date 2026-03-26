@@ -1,3 +1,4 @@
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 ### COPY ITEMS FROM WATCH FOLDER TO BACKUP
 Set-Location "C:\RoyalMail\Click&Drop\Labels"
 Move-Item -Path .\*.pdf -Destination "C:\RoyalMail\LabelBackup"
