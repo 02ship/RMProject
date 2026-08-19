@@ -21,6 +21,8 @@ Remove-Item *.jpg
                 $name = $name.TrimEnd(".pdf")
                 $logline = "$(Get-Date), $changeType, $path"
                 $specialthanks = Get-Content -Path "C:/RoyalMail/RMProject/specialthankscustomers.csv"
+                $specialthanks = $specialthanks -join '|'
+                Write-Host $specialthanks
                 Add-content "C:\RoyalMail\log.txt" -value $logline
                 Start-Process C:\RoyalMail\RMProject\irfan3.bat -NoNewWindow -Wait
                 $crystalReportsNinjaArguments = @(
