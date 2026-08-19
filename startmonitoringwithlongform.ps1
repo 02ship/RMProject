@@ -20,9 +20,21 @@ Remove-Item *.jpg
                 $changeType = $Event.SourceEventArgs.ChangeType
                 $name = $name.TrimEnd(".pdf")
                 $logline = "$(Get-Date), $changeType, $path"
+                $specialthanks = Get-Content -Path "C:/RoyalMail/RMProject/specialthankscustomers.csv"
+                Write-Host $specialthanks
                 Add-content "C:\RoyalMail\log.txt" -value $logline
                 Start-Process C:\RoyalMail\RMProject\irfan3.bat -NoNewWindow -Wait
-		Start-Process -FilePath "C:\RoyalMail\CrystalReportsNinja\Deployment\CrystalReportsNinja.exe" -ArgumentList "-F `"C:\RoyalMail\RMProject\Longform_Invoice_for_RM.rpt`" -E pdf -O `"C:\RoyalMail\invoices\$name.pdf`" -a `"HeaderRef:$name`" -a `"IsCopy:False`"" -a `"SpecialThanks:False`" -NoNewWindow -Wait
+                $crystalReportsNinjaArguments = @(
+                    '-F', 'C:\RoyalMail\RMProject\Longform_Invoice_for_RM.rpt',
+                    '-E', 'pdf',
+                    '-O', "C:\RoyalMail\invoices\$name.pdf",
+                    '-a', "HeaderRef:$name",
+                    '-a', 'IsCopy:False',
+                    '-a', "SpecialThanks:$specialthanks"
+                )
+                & 'C:\RoyalMail\CrystalReportsNinja\Deployment\CrystalReportsNinja.exe' @crystalReportsNinjaArguments
+                if ($LASTEXITCODE -ne 0) { throw "CrystalReportsNinja failed with exit code $LASTEXITCODE" }
+                Write-Host "CRNinja ran"
                 Start-Process C:\RoyalMail\RMProject\autoprintlongform.bat ('C:\RoyalMail\invoices\' + $name.ToString() + '.pdf') -NoNewWindow -Wait
               }    
 ### DECIDE WHICH EVENTS SHOULD BE WATCHED 
